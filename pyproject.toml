@@ -22,7 +22,7 @@ classifiers = [
 ]
 license = {text = "MIT"}
 dynamic = ["version"]
-dependencies = ["typing_extensions", "numpy"]
+dependencies = ["typing_extensions", "numpy>=1.21"]
 requires-python = ">=3.8"
 packages = [
     { "include" = "rpycocotools-stubs"}

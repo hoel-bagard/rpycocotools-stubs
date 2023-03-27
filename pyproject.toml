@@ -33,7 +33,7 @@ packages = [
 "Bug Tracker" = "https://github.com/hoel-bagard/rpycocotools-stubs/issues"
 
 [project.optional-dependencies]
-dev = ["pre-commit", "pip-tools", "ruff"]
+dev = ["pre-commit", "pip-tools", "ruff", "pyright"]
 build = ["hatch"]
 
 [tool.hatch.version]

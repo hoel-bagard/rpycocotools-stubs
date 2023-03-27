@@ -26,7 +26,7 @@ repos:
       - id: ruff
 
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.271
+    rev: v1.1.300
     hooks:
     - id: pyright
       additional_dependencies: ["typing_extensions", "numpy>=1.21"]

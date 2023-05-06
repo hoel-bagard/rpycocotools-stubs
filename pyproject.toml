@@ -22,7 +22,7 @@ classifiers = [
 ]
 license = {text = "MIT"}
 dynamic = ["version"]
-dependencies = ["typing_extensions", "numpy>=1.21"]
+dependencies = ["typing_extensions>=4.0", "numpy>=1.21.0"]
 requires-python = ">=3.8"
 packages = [
     { "include" = "rpycocotools-stubs"}
@@ -75,11 +75,12 @@ max-args = 10
 
 [tool.pyright]
 include = ["src/rpycocotools-stubs"]
+pythonVersion = "3.11"
+pythonPlatform = "Linux"
 
 strictListInference = true
 strictDictionaryInference = true
 strictSetInference = true
-
 reportMissingModuleSource = false
 reportMissingImports = true
 reportMissingTypeStubs = false
@@ -107,6 +108,3 @@ reportUnusedCallResult = false
 reportUnusedExpression = "warning"
 reportUnnecessaryTypeIgnoreComment = "warning"
 reportMatchNotExhaustive = "warning"
-
-pythonVersion = "3.10"
-pythonPlatform = "Linux"

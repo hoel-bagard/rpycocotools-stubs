@@ -1,9 +1,76 @@
+from typing import Literal, overload
+
 import numpy as np
 import numpy.typing as npt
 
-from .anns import EncodedRle, Polygons, PolygonsRS, Rle
+from .anns import EncodedRLE, Polygons, PolygonsRS, RLE
 
-def decode_rle(encoded_mask: Rle) -> npt.NDArray[np.uint8]: ...
-def decode_encoded_rle(encoded_mask: EncodedRle) -> npt.NDArray[np.uint8]: ...
-def decode_poly_rs(encoded_mask: PolygonsRS) -> npt.NDArray[np.uint8]: ...
-def decode_poly(poly: Polygons, width: int, height: int) -> npt.NDArray[np.uint8]: ...
+@overload
+def decode(encoded_mask: RLE | EncodedRLE | PolygonsRS,
+           width: None = None,
+           height: None = None,
+           ) -> npt.NDArray[np.uint8]:
+    ...
+
+@overload
+def decode(encoded_mask: Polygons,
+           width: int,
+           height: int,
+           ) -> npt.NDArray[np.uint8]:
+    ...
+
+def decode(encoded_mask: Polygons | RLE | EncodedRLE | PolygonsRS,
+           width: int | None,
+           height: int | None,
+           ) -> npt.NDArray[np.uint8]:
+    """Decode an encoded mask.
+
+    Args:
+        encoded_mask: The mask to decode. It has to be one of the 4 types of mask provided by this package.
+        width: If the encoded mask of type Polygons (the format used by COCO),
+               then the width of the image must be provided.
+        height: If the encoded mask of type Polygons (the format used by COCO),
+               then the height of the image must be provided.
+
+    Returns:
+        The decoded mask as a numpy array.
+    """
+    ...
+
+@overload
+def encode(mask: npt.NDArray[np.uint8],
+           target: Literal["rle"],
+           ) -> RLE:
+    ...
+
+@overload
+def encode(mask: npt.NDArray[np.uint8],
+           target: Literal["encoded_rle"],
+           ) -> EncodedRLE:
+    ...
+
+@overload
+def encode(mask: npt.NDArray[np.uint8],
+           target: Literal["polygons_rs"],
+           ) -> PolygonsRS:
+    ...
+
+@overload
+def encode(mask: npt.NDArray[np.uint8],
+           target: Literal["polygons"],
+           ) -> Polygons:
+    ...
+
+def encode(mask: npt.NDArray[np.uint8],
+           target: Literal["polygons"] | Literal["rle"] | Literal["encoded_rle"] | Literal["polygons_rs"],
+           ) -> Polygons | RLE | EncodedRLE | PolygonsRS:
+    """Decode an encoded mask.
+
+    Args:
+        mask: The mask to encode, it should be a 2 dimensional array.
+        target: The desired format for the encoded mask.
+
+    Returns:
+        The encoded mask.
+    """
+    ...

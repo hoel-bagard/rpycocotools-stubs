@@ -1,4 +1,4 @@
-from typing import TypeAlias, Iterator, Generic, TypeVar
+from typing import Generic, Iterator, TypeAlias, TypeVar
 
 from typing_extensions import Self
 
@@ -37,7 +37,7 @@ class Bbox:
     width: float
     height: float
     def __init__(self: Self, left: float, top: float, width: float, height: float) -> None: ...
-    def __iter__(self) -> Iterator[float]: ...
+    def __iter__(self: Self) -> Iterator[float]: ...
 
 class Image:
     id: int

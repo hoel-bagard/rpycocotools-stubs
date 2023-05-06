@@ -58,7 +58,8 @@ publish = "hatch build --clean && hatch publish"
 
 [tool.ruff]
 select = ["A", "B", "C4", "D", "E", "F", "N", "I", "Q", "UP", "ANN", "S", "BLE", "COM", "DTZ", "PIE", "PT", "RSE", "SIM","PTH", "PL", "TRY", "NPY", "RUF"]
-ignore = ["D1", "D401", "D204", "D203", "D213", "S101", "PLR2004", "A002", "A003"]
+# D407: Missing dashed underline after section ("Args", "Returns", etc...)
+ignore = ["A002", "A003", "D1", "D204", "D203", "D213", "D401", "D407", "S101", "PLR2004"]
 line-length = 120
 
 [tool.ruff.isort]
@@ -66,6 +67,9 @@ order-by-type = false
 
 [tool.ruff.flake8-quotes]
 docstring-quotes = "double"
+
+[tool.ruff.pydocstyle]
+convention = "google"
 
 [tool.ruff.pylint]
 max-args = 10

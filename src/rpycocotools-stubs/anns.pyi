@@ -1,24 +1,29 @@
-from typing import TypeAlias
+from typing import TypeAlias, Iterator, Generic, TypeVar
 
 from typing_extensions import Self
 
-class Annotation:
+_TSegmentation = TypeVar("_TSegmentation", Polygons, PolygonsRS, RLE, EncodedRLE)
+
+class Annotation(Generic[_TSegmentation]):
     id: int
     image_id: int
     category_id: int
-    segmentation: Polygons | PolygonsRS | Rle | EncodedRle
+    segmentation: _TSegmentation
     area: float
     bbox: Bbox
     iscrowd: int
-    def __init__(self: Self,
-                 id: int,
-                 image_id: int,
-                 category_id: int,
-                 segmentation: Polygons | PolygonsRS | Rle | EncodedRle,
-                 area: float,
-                 bbox: Bbox,
-                 iscrowd: int,
-                 ) -> None: ...
+    def __init__(
+            self: Self,
+            id: int,
+            image_id: int,
+            category_id: int,
+            segmentation: Polygons | PolygonsRS | RLE | EncodedRLE,
+            area: float,
+            bbox: Bbox,
+            iscrowd: int,
+    ) -> None: ...
+
+AnnotationAny: TypeAlias = Annotation[Polygons] | Annotation[PolygonsRS] | Annotation[RLE] | Annotation[EncodedRLE]
 
 class Category:
     id: int
@@ -32,6 +37,7 @@ class Bbox:
     width: float
     height: float
     def __init__(self: Self, left: float, top: float, width: float, height: float) -> None: ...
+    def __iter__(self) -> Iterator[float]: ...
 
 class Image:
     id: int
@@ -47,12 +53,12 @@ class PolygonsRS:
     counts: list[list[float]]
     def __init__(self: Self, size: list[int], counts: list[list[float]]) -> None: ...
 
-class Rle:
+class RLE:
     size: list[int]
     counts: list[int]
     def __init__(self: Self, size: list[int], counts: list[int]) -> None: ...
 
-class EncodedRle:
+class EncodedRLE:
     size: list[int]
     counts: str
     def __init__(self: Self, size: list[int], counts: str) -> None: ...

@@ -2,7 +2,7 @@ from typing import Generic, Iterator, TypeAlias, TypeVar
 
 from typing_extensions import Self
 
-_TSegmentation = TypeVar("_TSegmentation", Polygons, PolygonsRS, RLE, EncodedRLE)
+_TSegmentation = TypeVar("_TSegmentation", Polygons, PolygonsRS, RLE, COCO_RLE)
 
 class Annotation(Generic[_TSegmentation]):
     id: int
@@ -17,13 +17,13 @@ class Annotation(Generic[_TSegmentation]):
             id: int,
             image_id: int,
             category_id: int,
-            segmentation: Polygons | PolygonsRS | RLE | EncodedRLE,
+            segmentation: Polygons | PolygonsRS | RLE | COCO_RLE,
             area: float,
             bbox: Bbox,
             iscrowd: int,
     ) -> None: ...
 
-AnnotationAny: TypeAlias = Annotation[Polygons] | Annotation[PolygonsRS] | Annotation[RLE] | Annotation[EncodedRLE]
+AnnotationAny: TypeAlias = Annotation[Polygons] | Annotation[PolygonsRS] | Annotation[RLE] | Annotation[COCO_RLE]
 
 class Category:
     id: int
@@ -58,7 +58,7 @@ class RLE:
     counts: list[int]
     def __init__(self: Self, size: list[int], counts: list[int]) -> None: ...
 
-class EncodedRLE:
+class COCO_RLE:  # noqa: N801
     size: list[int]
     counts: str
     def __init__(self: Self, size: list[int], counts: str) -> None: ...

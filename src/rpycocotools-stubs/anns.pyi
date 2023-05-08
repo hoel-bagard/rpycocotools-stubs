@@ -10,7 +10,7 @@ class Annotation(Generic[_TSegmentation]):
     category_id: int
     segmentation: _TSegmentation
     area: float
-    bbox: Bbox
+    bbox: BBox
     iscrowd: int
     def __init__(
             self: Self,
@@ -19,7 +19,7 @@ class Annotation(Generic[_TSegmentation]):
             category_id: int,
             segmentation: Polygons | PolygonsRS | RLE | COCO_RLE,
             area: float,
-            bbox: Bbox,
+            bbox: BBox,
             iscrowd: int,
     ) -> None: ...
 
@@ -31,7 +31,7 @@ class Category:
     supercategory: str
     def __init__(self: Self, id: int, name: str, supercategory: str) -> None: ...
 
-class Bbox:
+class BBox:
     left: float
     top: float
     width: float

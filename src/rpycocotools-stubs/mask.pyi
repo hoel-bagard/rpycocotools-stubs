@@ -3,7 +3,7 @@ from typing import Literal, overload
 import numpy as np
 import numpy.typing as npt
 
-from .anns import COCO_RLE, Polygons, PolygonsRS, RLE
+from .anns import BBox, COCO_RLE, Polygons, PolygonsRS, RLE
 
 @overload
 def decode(encoded_mask: RLE | COCO_RLE | PolygonsRS,
@@ -72,5 +72,28 @@ def encode(mask: npt.NDArray[np.uint8],
 
     Returns:
         The encoded mask.
+    """
+    ...
+
+def area(encoded_mask: RLE | COCO_RLE | PolygonsRS | Polygons) -> int:
+    """Compute the area of the given mask.
+
+    Args:
+        encoded_mask: The mask whose area should be computed.
+
+    Returns:
+        The area
+    """
+    ...
+
+
+def to_bbox(encoded_mask: RLE | COCO_RLE | PolygonsRS | Polygons) -> BBox:
+    """Compute the bounding box of the given mask.
+
+    Args:
+        encoded_mask: The mask whose bounding box should be computed.
+
+    Returns:
+        The bounding box
     """
     ...

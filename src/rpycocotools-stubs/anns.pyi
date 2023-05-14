@@ -1,6 +1,8 @@
-from typing import Generic, Iterator, TypeAlias, TypeVar
+from typing import Generic, Iterator, Sequence, TypeAlias, TypeVar
 
 from typing_extensions import Self
+
+from . import COCO
 
 _TSegmentation = TypeVar("_TSegmentation", Polygons, PolygonsRS, RLE, COCO_RLE)
 
@@ -62,3 +64,22 @@ class COCO_RLE:  # noqa: N801
     size: list[int]
     counts: str
     def __init__(self: Self, size: list[int], counts: str) -> None: ...
+
+def from_dataset(
+        images: Sequence[Image],
+        annotations: Sequence[AnnotationAny],
+        categories: Sequence[Category],
+        image_folder_path: str,
+) -> COCO:
+    """Construct a COCO dataset from its components and the image folder.
+
+    Args:
+        images: The image entries composing the data.
+        annotations: The annotations entries composing the data.
+        categories: The categories entries composing the data.
+        image_folder_path: Path to the folder with the images.
+
+    Errors:
+        Will return `Err` if there is an annotation with an image id X, but no image entry has this id.
+    """
+    ...

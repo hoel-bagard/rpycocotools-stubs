@@ -17,7 +17,7 @@ class Annotation(Generic[_TSegmentation]):
             id: int,
             image_id: int,
             category_id: int,
-            segmentation: Polygons | PolygonsRS | RLE | COCO_RLE,
+            segmentation: _TSegmentation,
             area: float,
             bbox: BBox,
             iscrowd: int,

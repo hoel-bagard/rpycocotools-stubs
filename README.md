@@ -1,3 +1,6 @@
+# Moved to the [cocotools-rs repo](https://github.com/hoel-bagard/cocotools-rs/tree/master/rpycocotools-stubs)
+
+
 # rpycocotools-stubs
 [![PyPI](https://img.shields.io/pypi/v/rpycocotools-stubs?style=flat)](https://pypi.org/project/rpycocotools-stubs)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rpycocotools-stubs?style=flat)](https://pypi.org/project/rpycocotools-stubs)
